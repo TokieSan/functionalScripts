@@ -1,0 +1,1 @@
+../.shoosh/clean.sh

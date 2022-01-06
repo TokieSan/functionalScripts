@@ -1,0 +1,1 @@
+../.shoosh/registeration.sh
