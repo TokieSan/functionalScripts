@@ -1,1 +1,4 @@
-../.shoosh/dummy_cam.sh
+#!/bin/sh
+
+sudo modprobe v4l2loopback
+

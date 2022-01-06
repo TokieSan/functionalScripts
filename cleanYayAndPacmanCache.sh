@@ -1,1 +1,2 @@
-../.shoosh/clean.sh
+yay -Scc
+pacman -Rns $(pacman -Qtdq)
