@@ -27,7 +27,7 @@ def firstTimer():
     if isWanted == 'yes':
         TIMEQUER = True
         TTIME = input("What hour does the needed section starts in? (Example: 11)")
-        TIME = [int(TTIME)]
+        TIME = [TTIME]
     RATE = input("At what rate do you want me to check? Recommended is 20-30 ")
         
 
@@ -48,7 +48,7 @@ SEMS = ['202220']
 
 # Starting time of the desired section, if not make it false
 TIMEQUER = False 
-TIME = [11]
+TIME = ['11']
 
 # Rate for checking, 30 seconds to 1 min is recommended, in registeration day it's okay to go higher :V
 RATE = 30
@@ -66,16 +66,15 @@ except ImportError:
 
 def sendEmail():
     sent_from = gmail_user
-    # replace my email with .. your email
     to = [personal_mail]
     subject = 'THERE IS A SPOT IN ' + TITLE.capitalize() + '!'
     body = "Hurry up and register! For any inquiries contact me at eltokhy@aucegypt.edu"
-
     email_text = """\
     %s
     \n\n
     %s
     """ % (subject, body)
+
     try: 
         server = smtplib.SMTP('smtp.gmail.com', 587)
         server.connect('smtp.gmail.com', 587)
@@ -110,9 +109,12 @@ def doIt():
     currentHash = hashlib.sha224(response).hexdigest()
     return currentHash
 
+# get an initial hash for the first state
 currentHash = doIt()
+
 print("LAUNCHED SUCCESSFULLY")
 print('8',end='')
+
 while True:
     try:
     
@@ -130,15 +132,15 @@ while True:
             # notify
             print(">\nsomething changed\n8",end='')
             currentHash = newHash
-            # Using notify-send utility to send myself a notification
 
+            # Using notify-send utility to send myself a notification
             cmd = 'notify-send "A change happened in ' + str(TITLE) + ' HURRY!" -t 20000'
-            # If you want to recieve updates by email
-            # add email and password in file in same directory called private.py
-            sendEmail()
+
+            # If you want to recieve updates by email uncomment next line
+            # sendEmail()
             os.system(cmd)
-            time.sleep(RATE)
+            time.sleep(RATE*5)
             continue
 
     except Exception as e:
-        print("error")
+        print("Error in scraping the website")
